@@ -1,6 +1,6 @@
 package characters;
 
-/*Class for determing behavior of spirit*/
+/*Class for determining behavior of spirit*/
 public class SpiritBehavior implements MonsterBehaviorStrategy {
 
     /*Spirits have a higher dodge chance so apply bonus dodge chance to monster
