@@ -53,16 +53,21 @@ public class PotionLoader implements DataLoader<Potion>{
         // Split by slash or comma
         String[] parts = raw.split("[/,]");
 
-        for (String part : parts) {
-            String cleaned = part.trim().toUpperCase();
+        try {
+            for (String part : parts) {
+                String cleaned = part.trim().toUpperCase();
 
-            if (cleaned.isEmpty()) continue;
+                if (cleaned.isEmpty()) continue;
 
-            try {
-                stats.add(StatType.valueOf(cleaned));
-            } catch (IllegalArgumentException ex) {
-                System.err.println("WARNING: Unknown stat type '" + cleaned + "'");
+                try {
+                    stats.add(StatType.valueOf(cleaned));
+                } catch (IllegalArgumentException ex) {
+                    System.err.println("WARNING: Unknown stat type '" + cleaned + "'");
+                }
             }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return stats;

@@ -17,13 +17,18 @@ public class ArmorLoader implements DataLoader<Armor> {
         List<List<String>> rows = parser.parse(resourcePath);
         List<Armor> armor = new ArrayList<>();
 
-        for (List<String> row : rows) {
-            armor.add(new Armor(
-                    row.get(0),
-                    Integer.parseInt(row.get(1)),  // cost
-                    Integer.parseInt(row.get(2)),  // level
-                    Integer.parseInt(row.get(3))   // damage reduction
-            ));
+        try {
+            for (List<String> row : rows) {
+                armor.add(new Armor(
+                        row.get(0),
+                        Integer.parseInt(row.get(1)),  // cost
+                        Integer.parseInt(row.get(2)),  // level
+                        Integer.parseInt(row.get(3))   // damage reduction
+                ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return armor;

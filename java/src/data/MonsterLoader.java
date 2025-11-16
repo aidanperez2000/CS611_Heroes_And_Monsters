@@ -32,16 +32,21 @@ public class MonsterLoader implements DataLoader<Monster> {
             behavior = new SpiritBehavior();
         }
 
-        for (List<String> row : rows) {
-            monsters.add(new Monster(
-                    row.get(0),                     // name
-                    type,                           // monster type
-                    Integer.parseInt(row.get(1)),   // level
-                    Integer.parseInt(row.get(2)),   // damage
-                    Integer.parseInt(row.get(3)),   // defense
-                    Integer.parseInt(row.get(4)),   // dodge
-                    behavior                        // behavior
-            ));
+        try {
+            for (List<String> row : rows) {
+                monsters.add(new Monster(
+                        row.get(0),                     // name
+                        type,                           // monster type
+                        Integer.parseInt(row.get(1)),   // level
+                        Integer.parseInt(row.get(2)),   // damage
+                        Integer.parseInt(row.get(3)),   // defense
+                        Integer.parseInt(row.get(4)),   // dodge
+                        behavior                        // behavior
+                ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return monsters;

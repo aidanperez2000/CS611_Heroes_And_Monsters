@@ -17,14 +17,19 @@ public class WeaponLoader implements DataLoader<Weapon> {
         List<List<String>> rows = parser.parse(resourcePath);
         List<Weapon> weapons = new ArrayList<>();
 
-        for (List<String> row : rows) {
-            weapons.add(new Weapon(
-                    row.get(0),
-                    Integer.parseInt(row.get(1)),  // cost
-                    Integer.parseInt(row.get(2)),  // level
-                    Integer.parseInt(row.get(3)),  // damage
-                    Integer.parseInt(row.get(4))   // hands
-            ));
+        try {
+            for (List<String> row : rows) {
+                weapons.add(new Weapon(
+                        row.get(0),
+                        Integer.parseInt(row.get(1)),  // cost
+                        Integer.parseInt(row.get(2)),  // level
+                        Integer.parseInt(row.get(3)),  // damage
+                        Integer.parseInt(row.get(4))   // hands
+                ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return weapons;

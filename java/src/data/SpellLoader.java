@@ -27,15 +27,20 @@ public class SpellLoader implements DataLoader<Spell> {
         else
             type = SpellType.LIGHTNING;
 
-        for (List<String> row : rows) {
-            spells.add(new Spell(
-                    row.get(0),
-                    Integer.parseInt(row.get(1)),
-                    Integer.parseInt(row.get(2)),
-                    type,
-                    Integer.parseInt(row.get(3)),
-                    Integer.parseInt(row.get(4))
-            ));
+        try {
+            for (List<String> row : rows) {
+                spells.add(new Spell(
+                        row.get(0),
+                        Integer.parseInt(row.get(1)),
+                        Integer.parseInt(row.get(2)),
+                        type,
+                        Integer.parseInt(row.get(3)),
+                        Integer.parseInt(row.get(4))
+                ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return spells;

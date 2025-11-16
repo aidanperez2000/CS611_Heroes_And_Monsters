@@ -31,18 +31,23 @@ public class HeroLoader implements DataLoader<Hero> {
             levelUpStrategy = new SorcererLevelUp();
         }
 
-        for (List<String> row : rows) {
-            heroes.add(new Hero(
-                    row.get(0),
-                    type,
-                    Integer.parseInt(row.get(1)),  // mana
-                    Integer.parseInt(row.get(2)),  // strength
-                    Integer.parseInt(row.get(3)),  // agility
-                    Integer.parseInt(row.get(4)),  // dexterity
-                    Integer.parseInt(row.get(5)),  // starting gold
-                    Integer.parseInt(row.get(6)),  // starting exp
-                    levelUpStrategy
-            ));
+        try {
+            for (List<String> row : rows) {
+                heroes.add(new Hero(
+                        row.get(0),
+                        type,
+                        Integer.parseInt(row.get(1)),  // mana
+                        Integer.parseInt(row.get(2)),  // strength
+                        Integer.parseInt(row.get(3)),  // agility
+                        Integer.parseInt(row.get(4)),  // dexterity
+                        Integer.parseInt(row.get(5)),  // starting gold
+                        Integer.parseInt(row.get(6)),  // starting exp
+                        levelUpStrategy
+                ));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return heroes;
