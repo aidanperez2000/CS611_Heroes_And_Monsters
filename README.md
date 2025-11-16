@@ -1,6 +1,6 @@
 # CS611_Heroes_And_Monsters
 Heroes and Monsters game for CS611
-## How to Ru
+## How to Run
 ### In IntelliJ:
 1. Go to Main.java under CS611_Heroes_And_Monsters/java/src/
 2. Click Play button.
