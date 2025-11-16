@@ -24,7 +24,7 @@ public abstract class Item {
         return price;
     }
 
-    /*Get the required level of the itme
+    /*Get the required level of the item
     * returns: required level of item*/
     public int getRequiredLevel() {
         return requiredLevel;
