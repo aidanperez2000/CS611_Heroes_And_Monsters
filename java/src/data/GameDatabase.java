@@ -39,7 +39,7 @@ public class GameDatabase {
 
         warriors = heroLoader.load(BASE + "Warriors.txt");
         paladins = heroLoader.load(BASE + "Paladins.txt");
-        sorcerers = heroLoader.load(BASE +"Sorcerers.txt");
+        sorcerers = heroLoader.load(BASE + "Sorcerers.txt");
 
         dragons = monsterLoader.load(BASE + "Dragons.txt");
         exoskeletons = monsterLoader.load(BASE + "Exoskeletons.txt");
