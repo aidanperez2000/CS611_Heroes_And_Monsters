@@ -1,7 +1,7 @@
 package characters;
 
 
-public class SorcererLevelUp implements LevelUpStrategy{
+public class SorcererLevelUp implements LevelUpStrategy {
 
     /*Increase attributes of a sorcerer when they level up
      * hero: hero to level up*/
