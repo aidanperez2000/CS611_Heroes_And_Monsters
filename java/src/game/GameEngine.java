@@ -3,24 +3,29 @@ package game;
 import characters.Hero;
 import characters.Party;
 import data.GameDatabase;
+import world.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class GameEngine {
-    private Party party;
+    private final Party party;
+    private WorldMap map;
+    private int heroRow = 0, heroCol = 0;
 
     public GameEngine() {
         // Load all game data ONCE when engine starts
         GameDatabase.LoadAll();
         party = new Party();
+        generateMap();
     }
 
     public void run() {
         System.out.println("Welcome to Monsters and Heroes!");
         chooseHeroes();
         party.showParty();
+        map.printMap(heroRow, heroCol);
     }
 
     public void chooseHeroes() {
@@ -52,6 +57,32 @@ public class GameEngine {
             }
             catch (NumberFormatException e) {
                 System.out.println("Invalid input!");
+            }
+        }
+    }
+
+    public void openMarket() {
+        //TODO: implement this method
+    }
+
+    public void startBattle() {
+        //TODO: implement this method
+        System.out.println("Starting Battle!");
+    }
+
+    private void generateMap() {
+        map = new WorldMap(8, 8);
+
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                double roll = Math.random();
+
+                if (roll < 0.2)
+                    map.setTile(x, y, new Tile(new InaccesibleBehavior()));
+                else if (roll < 0.5)
+                    map.setTile(x, y, new Tile(new MarketBehavior()));
+                else
+                    map.setTile(x, y, new Tile(new CommonBehavior()));
             }
         }
     }
