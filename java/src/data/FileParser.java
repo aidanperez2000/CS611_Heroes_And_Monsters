@@ -6,7 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*Helper class for parsing files*/
 public class FileParser {
+
+    /*Parse file at a given path
+    * filePath: path of file to read from
+    * returns: list of strings as rows of file*/
     public static List<String[]> parseFile(String filePath) throws IOException {
         List<String[]> rows = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
