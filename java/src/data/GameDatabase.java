@@ -7,7 +7,6 @@ import items.Potion;
 import items.Spell;
 import items.Weapon;
 
-import java.io.IOException;
 import java.util.List;
 
 /*Class for building database for game*/
