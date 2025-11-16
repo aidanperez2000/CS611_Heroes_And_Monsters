@@ -6,7 +6,7 @@ import java.util.List;
 * from text files*/
 public interface DataLoader<T> {
     /*Method for loading data from text files
-    * filePath: file path of text file
+    * resourcePath: file path of text file
     * returns: list of a given type of data*/
-    List<T> load(String filePath);
+    List<T> load(String resourcePath);
 }

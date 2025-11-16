@@ -1,5 +1,6 @@
 package characters;
 
+import items.Armor;
 import items.Inventory;
 import items.Weapon;
 
