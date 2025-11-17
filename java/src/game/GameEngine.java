@@ -2,7 +2,6 @@ package game;
 
 import characters.Hero;
 import characters.Party;
-import characters.SorcererLevelUp;
 import data.GameDatabase;
 import world.*;
 
@@ -13,7 +12,7 @@ import java.util.Scanner;
 /*Class for running game logic*/
 public class GameEngine {
     private final Party party;
-    private WorldMap map;
+    private final WorldMap map;
     private int heroRow = 0, heroCol = 0;
     private boolean running = true;
 
@@ -113,7 +112,7 @@ public class GameEngine {
     /*Choose heroes for the game*/
     public void chooseHeroes() {
         Scanner input = new Scanner(System.in);
-        System.out.println("How many heroes you want to choose? (1-" + Party.MAX_PARTY_SIZE + ")");
+        System.out.println("How many heroes do you want to choose? (1-" + Party.MAX_PARTY_SIZE + ")");
         int count = 0;
         while (count < 1 || count > Party.MAX_PARTY_SIZE) {
             try {

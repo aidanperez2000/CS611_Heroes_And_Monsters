@@ -3,7 +3,7 @@ package characters;
 import java.util.ArrayList;
 import java.util.List;
 
-/*Class for managing hero party/
+/*Class for managing hero party*/
 public class Party {
     public static final int MAX_PARTY_SIZE = 3;
 
