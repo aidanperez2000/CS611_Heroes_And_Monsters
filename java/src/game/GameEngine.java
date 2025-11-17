@@ -2,6 +2,7 @@ package game;
 
 import characters.Hero;
 import characters.Party;
+import characters.SorcererLevelUp;
 import data.GameDatabase;
 import world.*;
 
@@ -9,25 +10,106 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*Class for running game logic*/
 public class GameEngine {
     private final Party party;
     private WorldMap map;
     private int heroRow = 0, heroCol = 0;
+    private boolean running = false;
+
+    //Command constants
+    private final String NORTH = "W";
+    private final String WEST = "A";
+    private final String SOUTH = "S";
+    private final String EAST = "D";
+    private final String INFO = "I";
+    private final String MARKET = "M";
+    private final String QUIT = "Q";
 
     public GameEngine() {
         // Load all game data ONCE when engine starts
         GameDatabase.LoadAll();
         party = new Party();
-        generateMap();
+        map = new WorldMap(8, 8);
     }
 
+    /*Run the game*/
     public void run() {
         System.out.println("Welcome to Monsters and Heroes!");
         chooseHeroes();
-        party.showParty();
-        map.printMap(heroRow, heroCol);
+        System.out.println("\nYour adventure begins!");
     }
 
+    private void navigate() {
+        Scanner in = new Scanner(System.in);
+
+        while (running) {
+            map.printMap(heroRow, heroCol);
+            printControls();
+            System.out.print("\nEnter command: ");
+            String command = in.nextLine().trim().toUpperCase();
+
+            switch (command) {
+                case NORTH: move(-1, 0); break;
+                case WEST: move(0, -1); break;
+                case SOUTH: move(1, 0); break;
+                case EAST: move(0, 1); break;
+                case INFO: party.showParty(); break;
+                case MARKET:
+                    Tile current = map.getTile(heroRow, heroCol);
+                    if (current.getBehavior() instanceof MarketBehavior)
+                        enterMarket();
+                    else
+                        System.out.println("You are not in a market!");
+                    break;
+                case QUIT:
+                    running = false;
+                    System.out.println("Goodbye, hero!");
+                    break;
+                default:
+                    System.out.println("Invalid command.");
+            }
+        }
+    }
+
+    /*Print the controls for the game*/
+    private void printControls() {
+        System.out.println("\nControls:");
+        System.out.println(NORTH + "/" + WEST + "/" + SOUTH + "/" + EAST + "("
+                + NORTH.toLowerCase() + "/" + WEST.toLowerCase() + "/" + SOUTH.toLowerCase() +
+                "/" + EAST.toLowerCase() + ") - Move");
+        System.out.println(MARKET + "(" + MARKET.toLowerCase() + ") - Market");
+        System.out.println(INFO + "(" + INFO.toLowerCase() + ") - Info");
+        System.out.println(QUIT + "(" + QUIT.toLowerCase() + ") - Quit");
+    }
+
+    /*Move a player to a new row or column
+    * row: row change
+    * col: column change*/
+    private void move(int row, int col) {
+        int newRow = heroRow + row;
+        int newCol = heroCol + col;
+
+        if (newRow < 0 || newCol < 0 ||
+                newRow >= map.getRows() || newCol >= map.getCols()) {
+            System.out.println("Invalid row or column!");
+            return;
+        }
+
+        Tile tile = map.getTile(newRow, newCol);
+
+        if (!tile.isAccessible()) {
+            System.out.println("Tile is not accessible!");
+            return;
+        }
+
+        heroRow = newRow;
+        heroCol = newCol;
+
+        tile.enter(this);
+    }
+
+    /*Choose heroes for the game*/
     public void chooseHeroes() {
         System.out.println("Choose your 3 heroes!");
 
@@ -61,6 +143,11 @@ public class GameEngine {
         }
     }
 
+    public void enterMarket() {
+        System.out.println("Entering the market");
+        //TODO: implement this method
+    }
+
     public void openMarket() {
         //TODO: implement this method
     }
@@ -68,22 +155,5 @@ public class GameEngine {
     public void startBattle() {
         //TODO: implement this method
         System.out.println("Starting Battle!");
-    }
-
-    private void generateMap() {
-        map = new WorldMap(8, 8);
-
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                double roll = Math.random();
-
-                if (roll < 0.2)
-                    map.setTile(x, y, new Tile(new InaccesibleBehavior()));
-                else if (roll < 0.5)
-                    map.setTile(x, y, new Tile(new MarketBehavior()));
-                else
-                    map.setTile(x, y, new Tile(new CommonBehavior()));
-            }
-        }
     }
 }

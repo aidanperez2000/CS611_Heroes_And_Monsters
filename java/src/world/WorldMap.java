@@ -3,9 +3,14 @@ package world;
 /*Class for building world map*/
 public class WorldMap {
     private final Tile[][] grid;
+    private final int rows;
+    private final int cols;
 
     public WorldMap(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
         grid = new Tile[rows][cols];
+        generate();
     }
 
     /*Get Tile at position
@@ -27,21 +32,21 @@ public class WorldMap {
     /*Get the number of rows in tile
     * returns: number of rows in tile*/
     public int getRows() {
-        return grid.length;
+        return rows;
     }
 
     /*Get the number of columns in tile
     * returns: number of columns in tile*/
     public int getCols() {
-        return grid[0].length;
+        return cols;
     }
 
     /*Print a map of the world
     * playerRow: current player row
     * playerCol: current player col*/
     public void printMap(int playerRow, int playerCol) {
-        for (int r = 0; r < grid.length; r++) {
-            for (int c = 0; c < grid[0].length; c++) {
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
                 if (r == playerRow && c == playerCol) {
                     System.out.print("P ");
                 } else if (!grid[r][c].isAccessible()) {
@@ -53,6 +58,22 @@ public class WorldMap {
                 }
             }
             System.out.println();
+        }
+    }
+
+    /*Generate the map*/
+    private void generate() {
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < cols; y++) {
+                double roll = Math.random();
+
+                if (roll < 0.2)
+                    grid[x][y] = new Tile(new InaccesibleBehavior());
+                else if (roll < 0.5)
+                    grid[x][y] = new Tile(new MarketBehavior());
+                else
+                    grid[x][y] = new Tile(new MarketBehavior());
+            }
         }
     }
 }

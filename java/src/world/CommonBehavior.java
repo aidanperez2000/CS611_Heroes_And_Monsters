@@ -12,7 +12,7 @@ public class CommonBehavior implements TileBehavior {
         if (Math.random() < 0.2)
             engine.startBattle();
         else
-            System.out.println("You are in a peaceful area");
+            System.out.println("The area seems peaceful...for now.");
     }
 
     /*Is the common tile accessible?

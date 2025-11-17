@@ -9,7 +9,8 @@ public class InaccesibleBehavior implements TileBehavior {
      * engine: game with inaccessible tile to enter*/
     @Override
     public void enter(GameEngine engine) {
-        System.out.println("This tile is inaccessible.");
+        /*his method will never be called because we return before
+        * calling this method*/
     }
 
     /*Is the inaccessible tile accessible?
