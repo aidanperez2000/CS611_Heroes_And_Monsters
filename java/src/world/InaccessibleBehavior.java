@@ -9,7 +9,7 @@ public class InaccessibleBehavior implements TileBehavior {
      * engine: game with inaccessible tile to enter*/
     @Override
     public void enter(GameEngine engine) {
-        /*his method will never be called because we return before
+        /*This method will never be called because we return before
         * calling this method*/
     }
 
