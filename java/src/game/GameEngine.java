@@ -15,7 +15,7 @@ public class GameEngine {
     private final Party party;
     private WorldMap map;
     private int heroRow = 0, heroCol = 0;
-    private boolean running = false;
+    private boolean running = true;
 
     //Command constants
     private final String NORTH = "W";
