@@ -38,6 +38,7 @@ public class GameEngine {
         System.out.println("Welcome to Monsters and Heroes!");
         chooseHeroes();
         System.out.println("\nYour adventure begins!");
+        navigate();
     }
 
     private void navigate() {
@@ -111,22 +112,31 @@ public class GameEngine {
 
     /*Choose heroes for the game*/
     public void chooseHeroes() {
-        System.out.println("Choose your 3 heroes!");
-
-        // Combine all heroes into one list
+        Scanner input = new Scanner(System.in);
+        System.out.println("How many heroes you want to choose? (1-" + Party.MAX_PARTY_SIZE + ")");
+        int count = 0;
+        while (count < 1 || count > Party.MAX_PARTY_SIZE) {
+            try {
+                count = Integer.parseInt(input.nextLine().trim());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please enter a number between 1 and " + Party.MAX_PARTY_SIZE);
+            }
+            if (count < 1 || count > Party.MAX_PARTY_SIZE) {
+                System.out.println("Please enter a number between 1 and " + Party.MAX_PARTY_SIZE);
+            }
+        }
         List<Hero> allHeroes = new ArrayList<>();
-        allHeroes.addAll(GameDatabase.warriors);
         allHeroes.addAll(GameDatabase.paladins);
         allHeroes.addAll(GameDatabase.sorcerers);
+        allHeroes.addAll(GameDatabase.warriors);
 
-        // Display them
-        for (int i = 0; i < allHeroes.size(); i++) {
+        // Display heroes
+        for (int i = 0; i < allHeroes.size(); i++)
             System.out.println((i + 1) + ": " + allHeroes.get(i).getName());
-        }
 
-        Scanner input = new Scanner(System.in);
-        while (party.getHeroCount() < Party.MAX_PARTY_SIZE) {
-            System.out.println("Choose a hero!");
+        while (party.getHeroCount() < count) {
+            System.out.println("Choose hero #" + (party.getHeroCount() + 1) + ": ");
 
             try {
                 int choice = Integer.parseInt(input.nextLine()) - 1;
