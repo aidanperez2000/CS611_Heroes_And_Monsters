@@ -72,7 +72,7 @@ public class WorldMap {
                 else if (roll < 0.5)
                     grid[x][y] = new Tile(new MarketBehavior());
                 else
-                    grid[x][y] = new Tile(new MarketBehavior());
+                    grid[x][y] = new Tile(new CommonBehavior());
             }
         }
     }
