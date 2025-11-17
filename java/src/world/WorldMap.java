@@ -29,8 +29,8 @@ public class WorldMap {
         grid[x][y] = tile;
     }
 
-    /*Get the number of rows in tile
-    * returns: number of rows in tile*/
+    /*Get the number of rows in the map
+    * returns: number of rows in the map*/
     public int getRows() {
         return rows;
     }
