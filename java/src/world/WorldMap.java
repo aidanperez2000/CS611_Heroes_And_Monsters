@@ -35,8 +35,8 @@ public class WorldMap {
         return rows;
     }
 
-    /*Get the number of columns in tile
-    * returns: number of columns in tile*/
+    /*Get the number of columns in the map
+    * returns: number of columns in the map*/
     public int getCols() {
         return cols;
     }
