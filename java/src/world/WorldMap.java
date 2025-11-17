@@ -68,7 +68,7 @@ public class WorldMap {
                 double roll = Math.random();
 
                 if (roll < 0.2)
-                    grid[x][y] = new Tile(new InaccesibleBehavior());
+                    grid[x][y] = new Tile(new InaccessibleBehavior());
                 else if (roll < 0.5)
                     grid[x][y] = new Tile(new MarketBehavior());
                 else

@@ -3,7 +3,7 @@ package world;
 import game.GameEngine;
 
 /*Behavior class for inaccessible tiles*/
-public class InaccesibleBehavior implements TileBehavior {
+public class InaccessibleBehavior implements TileBehavior {
 
     /*Attempt to enter an inaccessible tile
      * engine: game with inaccessible tile to enter*/
