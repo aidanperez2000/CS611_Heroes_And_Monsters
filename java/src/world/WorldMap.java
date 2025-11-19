@@ -76,4 +76,35 @@ public class WorldMap {
             }
         }
     }
+
+    /*Check to see if a tile at a given position has
+    * open neighbors
+    * x: x-position of tile
+    * y: y-position of tile
+    * returns: true if tile has open neighbors and false otherwise*/
+    public boolean hasOpenNeighbors(int x, int y) {
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        for (int[] dir : directions) {
+            int nx = x + dir[0];
+            int ny = y + dir[1];
+            if (nx >= 0 && nx < rows && ny >= 0 && ny < cols) {
+                if (grid[nx][ny].isAccessible()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*Find a safe tile for player to spawn in
+    * returns: row and column of spawn position*/
+    public int[] findSafeSpawn() {
+        while (true) {
+            int r = (int) (Math.random() * rows);
+            int c = (int) (Math.random() * cols);
+
+            if (grid[r][c].isAccessible() && hasOpenNeighbors(r, c))
+                return new int[]{r, c};
+        }
+    }
 }

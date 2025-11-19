@@ -15,7 +15,7 @@ public class GameEngine {
     private final Party party;
     private final WorldMap map;
     private final MarketEngine marketEngine = new MarketEngine();
-    private int heroRow = 0, heroCol = 0;
+    private int heroRow, heroCol;
     private boolean running = true;
 
     //Command constants
@@ -38,6 +38,9 @@ public class GameEngine {
     public void run() {
         System.out.println("Welcome to Monsters and Heroes!");
         chooseHeroes();
+        int[] spawn = map.findSafeSpawn();
+        heroRow = spawn[0];
+        heroCol = spawn[1];
         System.out.println("\nYour adventure begins!");
         navigate();
     }
