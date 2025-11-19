@@ -141,6 +141,9 @@ public class MarketEngine {
             return;
 
         Item item = items.get(idx);
+        /*All the prices are even numbers so dividing by two will always give whole numbers.
+        * If I have time, I'll come back and refactor this so that if we have any pricees with odd numbers.
+        * The gold increase by actually half.*/
         hero.increaseGold(item.getPrice() / 2);
         hero.getInventory().removeItem(item);
 
