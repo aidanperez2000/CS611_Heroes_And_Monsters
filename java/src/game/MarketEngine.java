@@ -127,14 +127,13 @@ public class MarketEngine {
             return;
         }
 
-        System.out.println("Choose item number or 0 to cancel");
-
         System.out.println("\n===ITEMS FOR SALE ===");
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             System.out.println((i + 1) + ") " + item.getName() + " (Sell Price: " +
                     (item.getPrice() / 2) + ")");
         }
+        System.out.println("Choose item number or 0 to cancel");
 
         int idx = IntHelpers.getInt(scanner) - 1;
         if (idx < 0 || idx >= items.size())
