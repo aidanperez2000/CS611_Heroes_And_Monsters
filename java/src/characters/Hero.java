@@ -130,7 +130,7 @@ public class Hero extends Character {
     }
 
     /*Get the hero's inventory
-    * return: hero's inventory*/
+    * returns: hero's inventory*/
     public Inventory getInventory() {
         return inventory;
     }
