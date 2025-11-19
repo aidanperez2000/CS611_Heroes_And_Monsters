@@ -127,7 +127,7 @@ public class MarketEngine {
             return;
         }
 
-        System.out.println("\n===ITEMS FOR SALE ===");
+        System.out.println("\n=== ITEMS FOR SALE ===");
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             System.out.println((i + 1) + ") " + item.getName() + " (Sell Price: " +
