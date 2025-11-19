@@ -14,7 +14,8 @@ import java.util.Scanner;
 public class GameEngine {
     private final Party party;
     private final WorldMap map;
-    private final MarketEngine marketEngine = new MarketEngine();
+    private final Scanner scanner;
+    private final MarketEngine marketEngine;
     private int heroRow, heroCol;
     private boolean running = true;
 
@@ -32,6 +33,8 @@ public class GameEngine {
         GameDatabase.LoadAll();
         party = new Party();
         map = new WorldMap(8, 8);
+        scanner = new Scanner(System.in);
+        marketEngine = new MarketEngine(scanner);
     }
 
     /*Run the game*/
@@ -46,13 +49,11 @@ public class GameEngine {
     }
 
     private void navigate() {
-        Scanner in = new Scanner(System.in);
-
         while (running) {
             map.printMap(heroRow, heroCol);
             printControls();
             System.out.print("\nEnter command: ");
-            String command = in.nextLine().trim().toUpperCase();
+            String command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
                 case NORTH: move(-1, 0); break;
@@ -116,11 +117,10 @@ public class GameEngine {
 
     /*Choose heroes for the game*/
     public void chooseHeroes() {
-        Scanner input = new Scanner(System.in);
         System.out.println("How many heroes do you want to choose? (1-" + Party.MAX_PARTY_SIZE + ")");
         int count = 0;
         while (count < 1 || count > Party.MAX_PARTY_SIZE) {
-            count = IntHelpers.getInt(input);
+            count = IntHelpers.getInt(scanner);
             if (count < 1 || count > Party.MAX_PARTY_SIZE) {
                 System.out.println("Please enter a number between 1 and " + Party.MAX_PARTY_SIZE);
             }
@@ -136,7 +136,7 @@ public class GameEngine {
 
         while (party.getHeroCount() < count) {
             System.out.println("Choose hero #" + (party.getHeroCount() + 1) + ": ");
-            int choice = IntHelpers.getInt(input) - 1;
+            int choice = IntHelpers.getInt(scanner) - 1;
             if (choice >= 0 && choice < allHeroes.size())
                 party.addHero(allHeroes.get(choice));
             else

@@ -11,7 +11,11 @@ import java.util.Scanner;
 
 /*Class for handling market logic*/
 public class MarketEngine {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public MarketEngine(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     /*Open the market.  User can buy or sell items.
     * party: party with heroes to choose from*/
@@ -52,10 +56,10 @@ public class MarketEngine {
         String choice = scanner.nextLine().trim();
 
         switch (choice) {
-            case "1" -> buyItem(hero, GameDatabase.weapons);
-            case "2" -> buyItem(hero, GameDatabase.armor);
-            case "3" -> buyItem(hero, GameDatabase.potions);
-            case "4" -> {
+            case "1": buyItem(hero, GameDatabase.weapons); break;
+            case "2": buyItem(hero, GameDatabase.armor); break;
+            case "3": buyItem(hero, GameDatabase.potions); break;
+            case "4":
                 System.out.println("Choose spell type:");
                 System.out.println("1) Fire Spells");
                 System.out.println("2) Ice Spells");
@@ -64,11 +68,11 @@ public class MarketEngine {
                 String s = scanner.nextLine().trim();
 
                 switch (s) {
-                    case "1" -> buyItem(hero, GameDatabase.fireSpells);
-                    case "2" -> buyItem(hero, GameDatabase.iceSpells);
-                    case "3" -> buyItem(hero, GameDatabase.lightningSpells);
+                    case "1": buyItem(hero, GameDatabase.fireSpells); break;
+                    case "2": buyItem(hero, GameDatabase.iceSpells); break;
+                    case "3": buyItem(hero, GameDatabase.lightningSpells); break;
                 }
-            }
+                break;
         }
     }
 
