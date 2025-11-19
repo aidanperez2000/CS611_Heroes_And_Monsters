@@ -36,7 +36,7 @@ public class MarketEngine {
     }
 
     /*View menu of items to buy and select item to buy
-    * party: party with heroes to choose item from*/
+    * party: party with heroes to choose from*/
     private void buyMenu(Party party) {
         Hero hero = chooseHero(party);
         if (hero == null)
