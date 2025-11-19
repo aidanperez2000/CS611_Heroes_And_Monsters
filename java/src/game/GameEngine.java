@@ -3,6 +3,7 @@ package game;
 import characters.Hero;
 import characters.Party;
 import data.GameDatabase;
+import helpers.IntHelpers;
 import world.*;
 
 import java.util.ArrayList;
@@ -13,17 +14,18 @@ import java.util.Scanner;
 public class GameEngine {
     private final Party party;
     private final WorldMap map;
+    private final MarketEngine marketEngine = new MarketEngine();
     private int heroRow = 0, heroCol = 0;
     private boolean running = true;
 
     //Command constants
-    private final String NORTH = "W";
-    private final String WEST = "A";
-    private final String SOUTH = "S";
-    private final String EAST = "D";
-    private final String INFO = "I";
-    private final String MARKET = "M";
-    private final String QUIT = "Q";
+    public static final String NORTH = "W";
+    public static final String WEST = "A";
+    public static final String SOUTH = "S";
+    public static final String EAST = "D";
+    public static final String INFO = "I";
+    public static final String MARKET = "M";
+    public static final String QUIT = "Q";
 
     public GameEngine() {
         // Load all game data ONCE when engine starts
@@ -58,7 +60,7 @@ public class GameEngine {
                 case MARKET:
                     Tile current = map.getTile(heroRow, heroCol);
                     if (current.getBehavior() instanceof MarketBehavior)
-                        enterMarket();
+                        openMarket();
                     else
                         System.out.println("You are not in a market!");
                     break;
@@ -115,12 +117,7 @@ public class GameEngine {
         System.out.println("How many heroes do you want to choose? (1-" + Party.MAX_PARTY_SIZE + ")");
         int count = 0;
         while (count < 1 || count > Party.MAX_PARTY_SIZE) {
-            try {
-                count = Integer.parseInt(input.nextLine().trim());
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Please enter a number between 1 and " + Party.MAX_PARTY_SIZE);
-            }
+            count = IntHelpers.getInt(input);
             if (count < 1 || count > Party.MAX_PARTY_SIZE) {
                 System.out.println("Please enter a number between 1 and " + Party.MAX_PARTY_SIZE);
             }
@@ -136,29 +133,17 @@ public class GameEngine {
 
         while (party.getHeroCount() < count) {
             System.out.println("Choose hero #" + (party.getHeroCount() + 1) + ": ");
-
-            try {
-                int choice = Integer.parseInt(input.nextLine()) - 1;
-                if (choice >= 0 && choice < allHeroes.size()) {
-                    party.addHero(allHeroes.get(choice));
-                }
-                else {
-                    System.out.println("Invalid hero!");
-                }
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Invalid input!");
-            }
+            int choice = IntHelpers.getInt(input) - 1;
+            if (choice >= 0 && choice < allHeroes.size())
+                party.addHero(allHeroes.get(choice));
+            else
+                System.out.println("Invalid hero!");
         }
     }
 
-    public void enterMarket() {
-        System.out.println("Entering the market");
-        //TODO: implement this method
-    }
-
+    /*Open the market*/
     public void openMarket() {
-        //TODO: implement this method
+        marketEngine.open(party);
     }
 
     public void startBattle() {
