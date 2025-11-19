@@ -13,7 +13,7 @@ public class IntHelpers {
             try {
                 return Integer.parseInt(scanner.nextLine().trim());
             }
-            catch (Exception e) {
+            catch (NumberFormatException e) {
                 System.out.println("Enter a valid number.");
             }
         }
