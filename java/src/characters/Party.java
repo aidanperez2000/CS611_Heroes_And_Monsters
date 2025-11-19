@@ -38,7 +38,8 @@ public class Party {
         System.out.println("Party:");
         for (int i = 0; i < heroes.size(); i++) {
             System.out.println((i + 1) + ". " + heroes.get(i).getName() + " HP: " + heroes.get(i).getHp()
-                + " Level: " + heroes.get(i).getLevel() + " Mana: " + heroes.get(i).getMana());
+                + " Level: " + heroes.get(i).getLevel() + " Mana: " + heroes.get(i).getMana() + " Gold: "
+                + heroes.get(i).getGold());
         }
     }
 }

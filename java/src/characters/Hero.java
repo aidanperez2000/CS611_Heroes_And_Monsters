@@ -119,13 +119,20 @@ public class Hero extends Character {
     }
 
     /*Decrease gold by a given amount
-    * amount: amount to decrease gold by*/
+    * amount: amount to decrease gold by
+    * returns: true if amount could be spent and false otherwise*/
     public boolean spendGold(int amount) {
         if (gold >= amount) {
             gold -= amount;
             return true;
         }
         return false;
+    }
+
+    /*Get the hero's inventory
+    * returns: hero's inventory*/
+    public Inventory getInventory() {
+        return inventory;
     }
 
     /*Get the type of hero
