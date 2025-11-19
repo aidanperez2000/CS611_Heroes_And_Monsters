@@ -113,7 +113,7 @@ public class MarketEngine {
     }
 
     /*View menu of items to sell.  Hero sells item for half its original price
-    * party: party with heroes to buy from*/
+    * party: party with heroes to choose from*/
     private void sellMenu(Party party) {
         Hero hero = chooseHero(party);
 
