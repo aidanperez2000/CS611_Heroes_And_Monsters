@@ -30,6 +30,12 @@ public abstract class Character {
         return hp;
     }
 
+    /*Set hp to a given value.
+    * hp: hp to set*/
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     /*Is this character dead?
     * returns: true if hp is less than or equal to 0 and false otherwise*/
     public boolean isDead() {

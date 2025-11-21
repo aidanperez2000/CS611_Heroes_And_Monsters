@@ -1,6 +1,8 @@
 package game;
 
 import characters.Hero;
+import characters.Monster;
+import characters.MonsterFactory;
 import characters.Party;
 import data.GameDatabase;
 import helpers.IntHelpers;
@@ -149,8 +151,24 @@ public class GameEngine {
         marketEngine.open(party);
     }
 
+    /*Start a new battle*/
     public void startBattle() {
-        //TODO: implement this method
-        System.out.println("Starting Battle!");
+        System.out.println("\nA wild group of monsters appears!");
+
+        int maxHeroLevel = 1;
+        for (Hero h: party.getHeroes())
+            if (!h.isDead())
+                maxHeroLevel = Math.max(maxHeroLevel, h.getLevel());
+
+        //pick monsters for battle
+        List<Monster> monsters = MonsterFactory.createMonstersForBattle(party, maxHeroLevel);
+
+        BattleEngine battleEngine = new BattleEngine(party, monsters, scanner);
+        boolean heroesWon = battleEngine.startBattle();
+
+        if (!heroesWon) {
+            System.out.println("Game over.");
+            running = false;
+        }
     }
 }
