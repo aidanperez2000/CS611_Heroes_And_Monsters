@@ -1,8 +1,6 @@
 package characters;
 
-import items.Armor;
-import items.Inventory;
-import items.Weapon;
+import items.*;
 
 /*Class for keeping track of heroes.  Heroes include
 * paladins, sorcerers, and warriors*/
@@ -139,5 +137,64 @@ public class Hero extends Character {
     * returns: hero class which is enum that determines type of hero*/
     public HeroClass getHeroClass() {
         return heroClass;
+    }
+
+    /*Reduce mana by a certain amount*/
+    public void spendMana(int amount) {
+        mana = Math.max(mana - amount, 0);
+    }
+
+    /*Kill a hero by setting hp to 0*/
+    public void kill() {
+        hp = 0;
+    }
+
+    /*Revive hero's mana and hp by half*/
+    public void reviveAtHalf() {
+        hp = (level * 100) / 2;
+        mana = mana / 2;
+    }
+
+    /*Get equipped weapon of hero
+    * returns: hero's equipped weapon*/
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    /*Set equipped weapon for hero
+    * weapon: weapon to set*/
+    public void equipWeapon(Weapon weapon) {
+        this.equippedWeapon = weapon;
+    }
+
+    /*Get equipped armor
+    * returns: equipped armor of hero*/
+    public Armor getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    /*Set equipped armor for hero
+    * armor: armor to set*/
+    public void equipArmor(Armor armor) {
+        this.equippedArmor = armor;
+    }
+
+    /*Increase hp and mana, to be used at the end of a
+    * battle if hero wins*/
+    public void regenEndOfRound() {
+        hp = Math.min(level * 100, hp + (int) (0.1 * hp));
+        mana = Math.min(mana + (int) (0.1 * mana), mana + 10);
+    }
+
+    public void applyPotion(Potion potion) {
+        for (StatType statType : potion.getAffectedStats()) {
+            switch (statType) {
+                case HEALTH: increaseHp(potion.getEffectAmount()); break;
+                case MANA: increaseMana(potion.getEffectAmount()); break;
+                case STRENGTH: increaseStrength(potion.getEffectAmount()); break;
+                case DEXTERITY: increaseDexterity(potion.getEffectAmount()); break;
+                case AGILITY: increaseAgility(potion.getEffectAmount()); break;
+            }
+        }
     }
 }
