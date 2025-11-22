@@ -331,7 +331,7 @@ public class BattleEngine {
                 continue;
             }
 
-            double baseDamage = monster.getDamage() * 0.05;
+            double baseDamage = monster.getDamage() * 0.05 + monster.getLevel() * 0.1;
 
             Armor armor = hero.getEquippedArmor();
             double armorReduction = (armor != null) ? armor.getDamageReduction() : 0;
@@ -340,8 +340,6 @@ public class BattleEngine {
                     0,
                     baseDamage - armorReduction
             );
-
-            damageAfterDefense += monster.getLevel() * 0.1;
 
             int finalDamage = (int) Math.round(damageAfterDefense);
 
