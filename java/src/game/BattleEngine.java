@@ -78,12 +78,10 @@ public class BattleEngine {
                         actionTaken = true;
                         break;
                     case "2":
-                        heroCastSpell(hero);
-                        actionTaken = true;
+                        actionTaken = heroCastSpell(hero);
                         break;
                     case "3":
-                        heroUsePotion(hero);
-                        actionTaken = true;
+                        actionTaken = heroUsePotion(hero);
                         break;
                     case "4":
                         heroChangeEquipment(hero);
@@ -137,12 +135,13 @@ public class BattleEngine {
     }
 
     /*Hero casts a spell
-    * hero: hero that casts spell*/
-    private void heroCastSpell(Hero hero) {
+    * hero: hero that casts spell
+    * returns: true if hero cast a spell and false otherwise*/
+    private boolean heroCastSpell(Hero hero) {
         List<Spell> spells = hero.getInventory().getSpells();
         if (spells.isEmpty()) {
             System.out.println(hero.getName() + " has no spells.");
-            return;
+            return false;
         }
 
         System.out.println("\nSpells:");
@@ -158,18 +157,18 @@ public class BattleEngine {
         int choice = IntHelpers.getInt(scanner) - 1;
 
         if (choice < 0 || choice >= spells.size())
-            return;
+            return false;
 
         Spell spell = spells.get(choice);
 
         if (hero.getMana() < spell.getManaCost()) {
             System.out.println("Not enough mana to cast spell.");
-            return;
+            return false;
         }
 
         Monster monster = chooseMonster();
         if (monster == null)
-            return;
+            return true;
 
         double dexterity = hero.getDexterity();
 
@@ -181,7 +180,7 @@ public class BattleEngine {
         if (monsterDodges(monster)) {
             System.out.println(hero.getName() + " cast " + spell.getName() + " on "
                     + monster.getName() + " but they dodged.");
-            return;
+            return true;
         }
 
         double damageAfterDefense = Math.max(0, baseDamage - monster.getDefense());
@@ -198,15 +197,17 @@ public class BattleEngine {
             System.out.println(monster.getName() + " has been killed.");
 
         hero.getInventory().removeSpell(spell);
+        return true;
     }
 
     /*Hero uses a potion on themselves
-    * hero: hero that uses potion*/
-    private void heroUsePotion(Hero hero) {
+    * hero: hero that uses potion
+    * returns: true if hero uses potion and false otherwise*/
+    private boolean heroUsePotion(Hero hero) {
         List<Potion> potions = hero.getInventory().getPotions();
         if (potions.isEmpty()) {
             System.out.println(hero.getName() + " has no potions.");
-            return;
+            return false;
         }
 
         System.out.println("\nPotions:");
@@ -220,13 +221,14 @@ public class BattleEngine {
 
         int choice = IntHelpers.getInt(scanner) - 1;
         if (choice < 0 || choice >= potions.size())
-            return;
+            return false;
 
         Potion potion = potions.get(choice);
         hero.applyPotion(potion);
         hero.getInventory().removePotion(potion);
 
         System.out.println(hero.getName() + " used potion " + potion.getName());
+        return true;
     }
 
     /*Hero changes equipment (weapon or armor)
