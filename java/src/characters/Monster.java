@@ -75,13 +75,13 @@ public class Monster extends Character {
     }
 
     /*Reduce defense by given percent
-    * p: percent to reduce damage by*/
+    * p: percent to reduce defense by*/
     public void reduceDefenseByPercent(double p) {
         defense = (int) Math.max(0, defense * (1 - p));
     }
 
-    /*Reduce defense by given percent
-    * p: percent to reduce defense by*/
+    /*Reduce damage by given percent
+    * p: percent to reduce damage by*/
     public void reduceDamageByPercent(double p) {
         damage = (int) Math.max(0, damage * (1 - p));
     }
