@@ -64,4 +64,31 @@ public class Monster extends Character {
     public MonsterType getMonsterType() {
         return monsterType;
     }
+
+    /*Clone a monster for battle
+    * returns: cloned monster*/
+    public Monster cloneForBattle() {
+        Monster monster = new Monster(this.name, this.monsterType, this.level, this.damage, this.defense,
+                this.dodgeChance, this.monsterBehaviorStrategy);
+        monster.setHp(this.hp);
+        return monster;
+    }
+
+    /*Reduce defense by given percent
+    * p: percent to reduce defense by*/
+    public void reduceDefenseByPercent(double p) {
+        defense = (int) Math.max(0, defense * (1 - p));
+    }
+
+    /*Reduce damage by given percent
+    * p: percent to reduce damage by*/
+    public void reduceDamageByPercent(double p) {
+        damage = (int) Math.max(0, damage * (1 - p));
+    }
+
+    /*Reduce dodge chance by given percent
+    * p: percent to reduce dodge chance by*/
+    public void reduceDodgeChanceByPercent(double p) {
+        dodgeChance = (int) Math.max(0, dodgeChance * (1 - p));
+    }
 }

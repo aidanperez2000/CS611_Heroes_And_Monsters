@@ -1,8 +1,6 @@
 package characters;
 
-import items.Armor;
-import items.Inventory;
-import items.Weapon;
+import items.*;
 
 /*Class for keeping track of heroes.  Heroes include
 * paladins, sorcerers, and warriors*/
@@ -17,7 +15,7 @@ public class Hero extends Character {
     private final HeroClass heroClass;
     private final LevelUpStrategy levelUpStrategy;
 
-    private Inventory inventory;
+    private final Inventory inventory;
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
@@ -139,5 +137,55 @@ public class Hero extends Character {
     * returns: hero class which is enum that determines type of hero*/
     public HeroClass getHeroClass() {
         return heroClass;
+    }
+
+    /*Reduce mana by a certain amount*/
+    public void spendMana(int amount) {
+        mana = Math.max(mana - amount, 0);
+    }
+
+    /*Revive hero's mana and hp by half*/
+    public void reviveAtHalf() {
+        hp = (level * 100) / 2;
+        mana = (mana + 10) / 2;
+    }
+
+    /*Get equipped weapon of hero
+    * returns: hero's equipped weapon*/
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    /*Set equipped weapon for hero
+    * weapon: weapon to set*/
+    public void equipWeapon(Weapon weapon) {
+        this.equippedWeapon = weapon;
+    }
+
+    /*Get equipped armor
+    * returns: equipped armor of hero*/
+    public Armor getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    /*Set equipped armor for hero
+    * armor: armor to set*/
+    public void equipArmor(Armor armor) {
+        this.equippedArmor = armor;
+    }
+
+    /*Apply a potion to the hero, increasing affected stats
+     * potion: the potion to apply to the hero
+     * Modifies the hero's stats based on the potion's effects*/
+    public void applyPotion(Potion potion) {
+        for (StatType statType : potion.getAffectedStats()) {
+            switch (statType) {
+                case HEALTH: increaseHp(potion.getEffectAmount()); break;
+                case MANA: increaseMana(potion.getEffectAmount()); break;
+                case STRENGTH: increaseStrength(potion.getEffectAmount()); break;
+                case DEXTERITY: increaseDexterity(potion.getEffectAmount()); break;
+                case AGILITY: increaseAgility(potion.getEffectAmount()); break;
+            }
+        }
     }
 }
