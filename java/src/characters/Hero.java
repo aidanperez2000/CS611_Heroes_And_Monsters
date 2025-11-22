@@ -15,7 +15,7 @@ public class Hero extends Character {
     private final HeroClass heroClass;
     private final LevelUpStrategy levelUpStrategy;
 
-    private Inventory inventory;
+    private final Inventory inventory;
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
@@ -144,15 +144,10 @@ public class Hero extends Character {
         mana = Math.max(mana - amount, 0);
     }
 
-    /*Kill a hero by setting hp to 0*/
-    public void kill() {
-        hp = 0;
-    }
-
     /*Revive hero's mana and hp by half*/
     public void reviveAtHalf() {
         hp = (level * 100) / 2;
-        mana = mana / 2;
+        mana = (mana + 10) / 2;
     }
 
     /*Get equipped weapon of hero
@@ -177,13 +172,6 @@ public class Hero extends Character {
     * armor: armor to set*/
     public void equipArmor(Armor armor) {
         this.equippedArmor = armor;
-    }
-
-    /*Increase hp and mana, to be used at the end of a
-    * battle if hero wins*/
-    public void regenEndOfRound() {
-        hp = Math.min(level * 100, hp + (int) (0.1 * hp));
-        mana = Math.min(mana + (int) (0.1 * mana), mana + 10);
     }
 
     public void applyPotion(Potion potion) {
