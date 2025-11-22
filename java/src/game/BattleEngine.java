@@ -472,6 +472,7 @@ public class BattleEngine {
                     + " | Dead: " + h.isDead());
         }
 
+        System.out.println("=== MONSTERS ===");
         for (Monster monster : monsters) {
             System.out.println(monster.getName() +
                     " | lvl: " + monster.getLevel() +
