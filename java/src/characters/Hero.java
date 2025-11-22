@@ -174,6 +174,9 @@ public class Hero extends Character {
         this.equippedArmor = armor;
     }
 
+    /*Apply a potion to the hero, increasing affected stats
+     * potion: the potion to apply to the hero
+     * Modifies the hero's stats based on the potion's effects*/
     public void applyPotion(Potion potion) {
         for (StatType statType : potion.getAffectedStats()) {
             switch (statType) {
