@@ -436,7 +436,10 @@ public class BattleEngine {
     * increasing gold and experience*/
     private void handleVictory() {
         int numMonsters = monsters.size();
-        int monsterLevel = monsters.get(0).getLevel();
+        int totalMonsterLevel = 0;
+        for (Monster monster : monsters)
+            totalMonsterLevel += monster.getLevel();
+        int averageMonsterLevel =  totalMonsterLevel / numMonsters;
 
         for (Hero h: party.getHeroes()) {
             if (h.isDead()) {
@@ -446,8 +449,8 @@ public class BattleEngine {
                 continue;
             }
 
-            int goldGain = numMonsters * monsterLevel * 10;
-            int expGain = numMonsters * monsterLevel * 2;
+            int goldGain = numMonsters * averageMonsterLevel * 10;
+            int expGain = numMonsters * averageMonsterLevel * 2;
 
             h.increaseGold(goldGain);
             h.gainExperience(expGain);
