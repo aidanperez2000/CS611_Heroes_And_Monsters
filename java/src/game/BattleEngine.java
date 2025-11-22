@@ -130,6 +130,7 @@ public class BattleEngine {
         int finalDamage = (int) Math.round(damageAfterDefense);
         monster.takeDamage(finalDamage);
 
+        System.out.println(hero.getName() + " attacked " + monster.getName() + " for " + finalDamage + " damage");
 
         if (monster.isDead())
             System.out.println(monster.getName() + " has been killed.");
