@@ -23,7 +23,7 @@
       - PaladinLevelUp.java: implements LevelUpStrategy for a Paladin
       - Party.java:  Class for managing heroes in party
       - SorcererLevelUp.java: Class that implements LevelUpStrategy for a Sorcerer
-      - SpiritBehavior.java: Class that implements MonsterBehaviorStrategy for a Spirt
+      - SpiritBehavior.java: Class that implements MonsterBehaviorStrategy for a Spirit
       - WarriorLevelUp.java: Class that implements LevelUpStrategy for a Warrior
     - data
       - ArmorLoader.java: load armor data from txt files and convert to a list of armors
@@ -49,7 +49,7 @@
       - Spell.java: class with all attributes and methods for spell, inherits from item class
       - SpellType.java: enum that contains different spell types, includes FIRE, ICE, and LIGHTNING
       - StatType.java: enum that contains different potion types, includes HEALTH, MANA, STRENGTH, DEXTERITY, AGILITY, and DEFENSE
-      - Weapon.java: class with all attibures and methods for weapon, inherits from item class
+      - Weapon.java: class with all attributes and methods for weapon, inherits from item class
     - world
       - CommonBehavior.java: class that determines how a common tile behaves, implements TileBehavior interface
       - InaccessibleBehavior.java: class that determines how an inaccessible tile behaves, implements TileBehavior interface
